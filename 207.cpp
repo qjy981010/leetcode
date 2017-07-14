@@ -1,3 +1,7 @@
+/*对图还不够熟悉，用的深度优先搜索一直向前找，把找到的节点在onstack数组里标为true，
+直到遇到以前走过的节点，即在onstack为true的节点则返回false，不可完成，
+《算法》中图的章节提到了这一方法，但是效率和下面的方法差的远*/
+
 class Solution {
 private:
 	struct node{
@@ -45,28 +49,30 @@ public:
 // beats 21.23 % of cpp submissions.
 
 
-/* a more simple one which can beats 95%.
+/* https://www.hrwhisper.me/leetcode-graph/
+ a more simple one which can beats 95%.
+ 循环，每次把图中入度为0的点相邻的边删除，并把此点存入
 
 class Solution {
 public:
 	bool canFinish(int numCourses, vector<pair<int, int>>& prerequisites) {
 		vector<vector<int> > g(numCourses);
 		vector<int> in_degree(numCourses, 0);
-		for (int i = 0; i < prerequisites.size(); i++){
+		for (int i = 0; i < prerequisites.size(); i++){ // 建立邻接链表，以尾为索引
 			g[prerequisites[i].second].push_back(prerequisites[i].first);
 			in_degree[prerequisites[i].first]++;
 		}
 		queue<int> q;
 		int cnt = 0;
 		for (int i = 0; i < numCourses; i++) if (in_degree[i] == 0) q.push(i);
-		while (!q.empty()){
+		while (!q.empty()){ // 循环直到没有入度为0的点
 			int cur = q.front();
 			q.pop();
 			for (auto it = g[cur].begin(); it != g[cur].end(); it++)
 				if (--in_degree[*it] == 0) q.push(*it);
 		}
  
-		for (int i = 0; i < numCourses; i++) if (in_degree[i] != 0) return false;
+		for (int i = 0; i < numCourses; i++) if (in_degree[i] != 0) return false; // 如果还有边，就说明有环，否则无环
 		return true;
 	}
 };

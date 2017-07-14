@@ -1,18 +1,20 @@
+/*可以先确定一个值然后用2sum的方法求解，
+循环确定第一个值，向后遍历定位第三个值，然后根据情况将第二个与第三个向中间靠拢*/
 class Solution {
 public:
     vector< vector<int> > threeSum(vector<int>& nums) {
         sort(nums.begin(), nums.end(), less<int>());
-        int n = nums.size(), minus_i, minus_i_j, i, j, k;
+        int n = nums.size(), minus_i, minus_i_j, i, j, k; // i为第一个，j为第二个，k为第三个；
         vector< vector<int> > result;
         vector<int> oneanswer(3);
         for (i = 0; ; ++i) {
-            while (i && nums[i]==nums[i-1] && i < n-2) ++i;
+            while (i && nums[i]==nums[i-1] && i < n-2) ++i; // 需要避免重复
             if (i > n-3) break;
             minus_i = ~nums[i]+1;
             j = i + 1;
-            k = i + 2;
+            k = n - 1;
             minus_i_j = minus_i - nums[j];
-            while (nums[k] < minus_i_j && k < n - 1) ++k;
+            while (nums[k] > minus_i_j && k > j) --k; // 定位第三个
             for (; ; ) {
                 if (k <= j) break;
                 minus_i_j = minus_i - nums[j];
@@ -25,9 +27,9 @@ public:
                     oneanswer[2] = nums[k];
                     result.push_back(oneanswer);
                     ++j;
-                    while (nums[j]==nums[j-1] && j < k) ++j;
+                    while (nums[j]==nums[j-1] && j < k) ++j; // 需要避免重复，同时向中间靠拢
                     --k;
-                    while (nums[k]==nums[k+1] && k > j) --k;            
+                    while (nums[k]==nums[k+1] && k > j) --k; // 需要避免重复            
                 }
                 else {
                     j++;
@@ -38,32 +40,6 @@ public:
     }
 };
 
-// beats 41.58 % of cpp submissions.
-
-
-/* more simple one
-
-class Solution {
-public:
-    vector<vector<int>> threeSum(vector<int>& nums) {
-        vector<vector<int>> res;
-        sort(nums.begin(), nums.end());
-        for (int k = 0; k < nums.size(); ++k) {
-            if (nums[k] > 0) break;
-            if (k > 0 && nums[k] == nums[k - 1]) continue;
-            int target = 0 - nums[k];
-            int i = k + 1, j = nums.size() - 1;
-            while (i < j) {
-                if (nums[i] + nums[j] == target) {
-                    res.push_back({nums[k], nums[i], nums[j]});
-                    while (i < j && nums[i] == nums[i + 1]) ++i;
-                    while (i < j && nums[j] == nums[j - 1]) --j;
-                    ++i; --j;
-                } else if (nums[i] + nums[j] < target) ++i;
-                else --j;
-            }
-        }
-        return res;
-    }
-};
-*/
+// 本来只能到50%，改为将k从后往前定位后达到92%，下面这个网址有Ksum的总结
+// https://www.sigmainfy.com/blog/summary-of-ksum-problems.html
+// 2sum用哈希表复杂度会变为线性，感觉用set去重效率应该不会很高
