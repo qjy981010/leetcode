@@ -1,8 +1,8 @@
-#include<iostream>
-#include<algorithm>
-#include<string>
-#include<vector>
-#include<sstream>
+#include <iostream>
+#include <algorithm>
+#include <string>
+#include <vector>
+#include <sstream>
 
 using namespace std;
 

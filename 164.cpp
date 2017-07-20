@@ -1,10 +1,24 @@
-#include<iostream>
-#include<unordered_set>
-#include<vector>
+// Maximum Gap
+#include <iostream>
+#include <unordered_set>
+#include <vector>
+#include <algorithm>
 
 using namespace std;
 
 class Solution {
+public:
+	int maximumGap(vector<int>& nums) {
+		sort(nums.begin(), nums.end());
+		int size = nums.size(), maxgap = 0;
+		for (int i = 1; i < size; ++i) {
+			if (maxgap < nums[i] - nums[i-1]) maxgap = nums[i] - nums[i-1];
+		}
+		return maxgap;
+	}
+};
+
+class Solutionbad {
 public:
 	int maximumGap(vector<int>& nums) {
 		int size = nums.size();
