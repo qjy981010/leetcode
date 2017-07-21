@@ -1,32 +1,41 @@
-#include<iostream>
-#include<string>
+#include <iostream>
+#include <string>
+#include <stack>
 
 using namespace std;
 
 class Solution {
 public:
 	int longestValidParentheses(string s) {
-		size = s.size();
-		if (!size) return 0;
-		int lvp[size];
-		if (s[0] == '(') lvp[0] = 1;
-		else lvp[0] = -1;
-		int i = 1;
+		int size = s.size();
+		stack<int> mystack;
+		int i = 0;
 		for (; i < size; ++i) {
 			if (s[i] == '(') {
-				if (lvp[i-1] <= 0) lvp[i] = 1;
-				else lvp[i] = lvp[i-1] + 1;
+				mystack.push(i);
 			}
-			if (s[i] == ')') {
-				lvp[i] = lvp[i-1] - 1;
+			else {
+				if (!mystack.empty() && s[mystack.top()] == '(') mystack.pop();
+				else mystack.push(i);
 			}
 		}
+		int max = 0 ,j;
+		if (!mystack.size()) return size;
+		i = size;
+		while (!mystack.empty()) {
+			j = mystack.top();
+			mystack.pop();
+			if (max < i - j - 1) max = i - j - 1;
+			i = j;
+		}
+		if (max < j) max = j;
+		return max;
 	}
-}
+};
 
 int main() {
 	Solution solve;
-	string s = "()())()))(()))))";
+	string s = "(";
 	cout << solve.longestValidParentheses(s) << endl;
 	return 0;
 }
