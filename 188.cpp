@@ -1,13 +1,22 @@
-#include<iostream>
-#include<vector>
+#include <iostream>
+#include <vector>
 
 using namespace std;
+
+
 
 class Solution {
 public:
 	int maxProfit(int k, vector<int>& prices) {
 		long long n = prices.size();
 		if (n < 2 || !k) return 0;
+        if (k > n / 2){ // simple case
+            int ans = 0;
+            for (int i=1; i<len; ++i){
+                ans += max(prices[i] - prices[i-1],0);
+            }
+            return ans;
+        }
 		long long columes = min(n + 1, ((long long)k << 1) + 1); // the number of columns
 		int profit[2][columes], i = 1, j, currentline;
 		profit[0][0] = profit[1][0] = 0; // the first column
@@ -27,6 +36,38 @@ public:
 		return maxprofit;
 	}
 };
+
+/* DP solution from the discuss
+class Solution {
+public:
+    int maxProfit(int k, vector<int> &prices) {
+        int len = prices.size();
+        if (len<2) return 0;
+        if (k>len/2){ // simple case
+            int ans = 0;
+            for (int i=1; i<len; ++i){
+                ans += max(prices[i] - prices[i-1],0);
+            }
+            return ans;
+        }
+        int hold[k+1];
+        int rele[k+1];
+        for (int i=0;i<=k;++i){
+            hold[i] = INT_MIN;
+            rele[i] = 0;
+        }
+        int cur;
+        for (int i=0; i<len; ++i){
+            cur = prices[i];
+            for(int j=k; j>0; --j){
+                rele[j] = max(rele[j],hold[j] + cur);
+                hold[j] = max(hold[j],rele[j-1] - cur);
+            }
+        }
+        return rele[k];
+    }
+};
+*/
 
 int main() {
 	Solution solve;

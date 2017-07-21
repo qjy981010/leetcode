@@ -35,9 +35,10 @@ public:
 	}
 };
 
-class Solutionbad0 {
+class Solutionok0 {
 public:
 	int size;
+	unordered_map <int, bool> mymap;
 
 	bool canCross(vector<int>& stones) {
 		size = stones.size();
@@ -45,28 +46,36 @@ public:
 	}
 
 	bool frogCross(int pos, int step, vector<int>& stones) {
+		int key = pos | step << 11;
+		if (mymap.find(key) != mymap.end()) return mymap[key];
 		if (pos == size - 1) return true;
-		int canreach = stones[pos] + step;
+		int canreach = stones[pos] + step, gap;
 		for (int i = pos + 1; i < size; ++i) {
-			if (stones[i] < canreach - 1) continue;
-			if (stones[i] > canreach + 1) break;
-			if (stones[i] == canreach + 1) {
-				if (frogCross(i, step + 1, stones)) return true;
-			}
-			else if (stones[i] == canreach) {
-				if (frogCross(i, step, stones)) return true;
-			}
-			else if (stones[i] == canreach - 1 && step > 1) {
-				if (frogCross(i, step - 1, stones)) return true;
+			gap = stones[i] - canreach;
+			if (gap < - 1) continue;
+			if (gap > 1) break;
+			if (gap != -1 || gap == -1 && step > 1) {
+				if (frogCross(i, step + gap, stones)) {
+					mymap.insert(pair<int, bool> (key, true));
+					return true;
+				}
 			}
 		}
+		mymap.insert(pair<int, bool> (key, false));
 		return false;
 	}
 };
 
-class Solutionbad2 {
+class Solution {
 public:
+	struct hash_fun {
+		size_t operator() (const pair<int, int>& i) const {
+			return i.first ^ i.second;
+		}
+	};
+
 	int size;
+	unordered_map <pair<int, int>, bool, hash_fun> mymap;
 
 	bool canCross(vector<int>& stones) {
 		size = stones.size();
@@ -74,28 +83,28 @@ public:
 	}
 
 	bool frogCross(int pos, int step, vector<int>& stones) {
+		if (mymap.find(make_pair(pos, step)) != mymap.end()) return mymap[make_pair(pos, step)];
 		if (pos == size - 1) return true;
-		int canreach = stones[pos] + step;
-		for (int i = min(pos + step + 1, size - 1); i > pos; --i) {
-			if (stones[i] < canreach - 1) break;
-			if (stones[i] > canreach + 1) continue;
-			if (stones[i] == canreach + 1) {
-				if (frogCross(i, step + 1, stones)) return true;
-			}
-			else if (stones[i] == canreach) {
-				if (frogCross(i, step, stones)) return true;
-			}
-			else if (stones[i] == canreach - 1 && step > 1) {
-				if (frogCross(i, step - 1, stones)) return true;
+		int canreach = stones[pos] + step, gap;
+		for (int i = pos + 1; i < size; ++i) {
+			gap = stones[i] - canreach;
+			if (gap < - 1) continue;
+			if (gap > 1) break;
+			if (gap != -1 || gap == -1 && step > 1) {
+				if (frogCross(i, step + gap, stones)) {
+					mymap[make_pair(pos, step)] = true;
+					return true;
+				}
 			}
 		}
+		mymap[make_pair(pos, step)] = false;
 		return false;
 	}
 };
 
 int main() {
 	Solution solve;
-	vector<int> stones = {0,1,3,6,10,13,14};
+	vector<int> stones = {0,1,3,5,6,8,12,17};
 	cout << solve.canCross(stones) << endl;
 }
 
