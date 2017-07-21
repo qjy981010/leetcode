@@ -1,5 +1,7 @@
-#include<iostream>
-#include<vector>
+// 二分查找分别找出要插入区间的头和尾应在位置，然后分情况处理
+
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -11,7 +13,7 @@ struct Interval {
     Interval(int s, int e) : start(s), end(e) {}
 };
 
-class Solution {
+class Solution { // 74.62%
 public:
 	vector<Interval> insert(vector<Interval>& intervals, Interval newInterval) {
 		int size = intervals.size();
@@ -26,7 +28,7 @@ public:
 			return intervals;
 		}
 
-		while (right - left > 1) {
+		while (right - left > 1) { // find the position of start
 			mid = (right + left) >> 1;
 			if (intervals[mid].start > start) {
 				right = mid;
@@ -38,33 +40,35 @@ public:
 		if (start <= intervals[left].end) leftpos = left;
 		else leftpos = right;
 
-		if (start < intervals[leftpos].start) {
-			if (end < intervals[leftpos].start) {
-				intervals.insert(intervals.begin() + leftpos, Interval(start, end));
-				return intervals;
+		if (end < intervals[leftpos+1].start) {// if the end is close to the start, get the result now.
+			if (start < intervals[leftpos].start) {
+				if (end < intervals[leftpos].start) {
+					intervals.insert(intervals.begin() + leftpos, Interval(start, end));
+					return intervals;
+				}
+				else if (end <= intervals[leftpos].end) {
+					intervals[leftpos].start = start;
+					return intervals;
+				}
+				else if (leftpos + 1 < size && end < intervals[leftpos+1].start || leftpos + 1 >= size) {
+					intervals[leftpos].start = start;
+					intervals[leftpos].end = end;
+					return intervals;
+				}
 			}
-			else if (end <= intervals[leftpos].end) {
-				intervals[leftpos].start = start;
-				return intervals;
-			}
-			else if (leftpos + 1 < size && end < intervals[leftpos+1].start || leftpos + 1 >= size) {
-				intervals[leftpos].start = start;
-				intervals[leftpos].end = end;
-				return intervals;
+			else {
+				if (end <= intervals[leftpos].end) {
+					return intervals;
+				}
+				else if (leftpos + 1 < size && end < intervals[leftpos+1].start || leftpos + 1 == size) {
+					intervals[leftpos].end = end;
+					return intervals;
+				}
 			}
 		}
-		else {
-			if (end <= intervals[leftpos].end) {
-				return intervals;
-			}
-			else if (leftpos + 1 < size && end < intervals[leftpos+1].start || leftpos + 1 == size) {
-				intervals[leftpos].end = end;
-				return intervals;
-			}
-		}
-		
+
 		left = leftpos; right = size - 1;
-		while (right - left > 1) {
+		while (right - left > 1) { // find the position of end
 			mid = (right + left) >> 1;
 			if (intervals[mid].end < end) {
 				left = mid;

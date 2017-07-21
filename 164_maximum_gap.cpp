@@ -1,4 +1,8 @@
 // Maximum Gap
+// 排序后再找最大间隔，不符合线性时间复杂度。可以使用桶排序达到线性时间复杂度，最大间隔在桶之间
+
+/*note：桶排序*/
+
 #include <iostream>
 #include <unordered_set>
 #include <vector>
@@ -63,11 +67,7 @@ public:
 
 int main() {
 	Solution solve;
-	vector<int> nums;
-	nums.push_back(-1);
-	nums.push_back(2);
-	nums.push_back(4);
-	nums.push_back(5);
+	vector<int> nums = {-1, 2, 4, 5};
 	cout << solve.maximumGap(nums) << endl;
 }
 

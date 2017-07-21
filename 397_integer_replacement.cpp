@@ -1,3 +1,7 @@
+// 递归，是偶数就除二，是奇数就先看看它上下是否为2的幂，如果是，则用位运算快速算出结果，如果不是就+1和-1递归取小的
+
+/*note: 位运算技巧：若n & (n-1)为0，则n为2的幂*/
+
 #include <iostream>
 
 using namespace std;
@@ -8,7 +12,7 @@ public:
 		return replace((long long)n, 0);
 	}
 
-	int replace(long long n, int step) {
+	int replace(long long n, int step) { // long long 处理溢出
 		if (n == 1) return step;
 		else if (!(n & 1)) {
 			step = replace(n >> 1, step + 1);

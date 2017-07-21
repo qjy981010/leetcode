@@ -1,10 +1,10 @@
-// Target Sum
+// 递归DFS，每个数分正负两种情况；可以转换为背包问题（一开始还以为要用Ksum才能得到nums中相加得sum的情况数。。）
 #include <iostream>
 #include <vector>
 
 using namespace std;
 
-class Solution1 { // DFS
+class Solution1 { // DFS, a little slow
 public:
 	int result = 0;
 	int size, target;
@@ -28,22 +28,6 @@ public:
 	}
 };
 
-class Solution12 {
-public:
-	int findTargetSumWays(vector<int>& nums, int S) {
-		int sum = 0, i = 0, size = nums.size();
-		for (; i < size; ++i) sum += nums[i];
-		if (sum < S || (sum + S) & 1) return 0;
-		sum = (sum + S) >> 1;
-		int dp[sum + 1] = {1};
-		for (i = 0; i < size; ++i) {
-			for (int j = sum; j >= nums[i]; --j) {
-				dp[j] += dp[j-nums[i]];
-			}
-		}
-		return dp[sum];
-	}
-};
 
 class Solution {
 public:

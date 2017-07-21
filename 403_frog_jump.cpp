@@ -1,9 +1,48 @@
-// Frog Jump
+// 通过unordered_map保存以前遇到的是否可达情况，注意结点索引与上一步的跳跃距离两个值才能对应一个bool（能否过河）
+
+/*note: 注意dp的记忆，需要记忆什么，，巧妙地merge两个变量，见Solutionok0的key的生成*/
+
 #include <iostream>
 #include <vector>
 #include <unordered_map>
 
 using namespace std;
+
+class Solution {
+public:
+	struct hash_fun {
+		size_t operator() (const pair<int, int>& i) const {
+			return i.first ^ i.second;
+		}
+	};
+
+	int size;
+	unordered_map <pair<int, int>, bool, hash_fun> mymap;
+
+	bool canCross(vector<int>& stones) {
+		size = stones.size();
+		return frogCross(0, 0, stones);
+	}
+
+	bool frogCross(int pos, int step, vector<int>& stones) {
+		if (mymap.find(make_pair(pos, step)) != mymap.end()) return mymap[make_pair(pos, step)];
+		if (pos == size - 1) return true;
+		int canreach = stones[pos] + step, gap;
+		for (int i = pos + 1; i < size; ++i) {
+			gap = stones[i] - canreach;
+			if (gap < - 1) continue;
+			if (gap > 1) break;
+			if (gap != -1 || gap == -1 && step > 1) {
+				if (frogCross(i, step + gap, stones)) {
+					mymap[make_pair(pos, step)] = true;
+					return true;
+				}
+			}
+		}
+		mymap[make_pair(pos, step)] = false;
+		return false;
+	}
+};
 
 class Solutionbad1 {
 public:
@@ -62,42 +101,6 @@ public:
 			}
 		}
 		mymap.insert(pair<int, bool> (key, false));
-		return false;
-	}
-};
-
-class Solution {
-public:
-	struct hash_fun {
-		size_t operator() (const pair<int, int>& i) const {
-			return i.first ^ i.second;
-		}
-	};
-
-	int size;
-	unordered_map <pair<int, int>, bool, hash_fun> mymap;
-
-	bool canCross(vector<int>& stones) {
-		size = stones.size();
-		return frogCross(0, 0, stones);
-	}
-
-	bool frogCross(int pos, int step, vector<int>& stones) {
-		if (mymap.find(make_pair(pos, step)) != mymap.end()) return mymap[make_pair(pos, step)];
-		if (pos == size - 1) return true;
-		int canreach = stones[pos] + step, gap;
-		for (int i = pos + 1; i < size; ++i) {
-			gap = stones[i] - canreach;
-			if (gap < - 1) continue;
-			if (gap > 1) break;
-			if (gap != -1 || gap == -1 && step > 1) {
-				if (frogCross(i, step + gap, stones)) {
-					mymap[make_pair(pos, step)] = true;
-					return true;
-				}
-			}
-		}
-		mymap[make_pair(pos, step)] = false;
 		return false;
 	}
 };

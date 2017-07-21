@@ -1,6 +1,8 @@
 /* 将两个链表对应位置的值相加，若需进位则另j为1，循环版本的parent保存父节点以赋值其next*/
 
-#include<iostream>
+/*note: 题目不难，第一次做的时候题目没看清，白写了好多代码。。*/
+
+#include <iostream>
 using namespace std;
 
 struct ListNode {

@@ -1,16 +1,18 @@
+// 动态规划，如果直接像123那样搞，单个数组变量占用空间太大，会报错，所以只保留上一行的数据。
+
+/*note：注意dp空间复杂度的优化*/
+
 #include <iostream>
 #include <vector>
 
 using namespace std;
 
-
-
 class Solution {
 public:
 	int maxProfit(int k, vector<int>& prices) {
-		long long n = prices.size();
+		long long n = prices.size(); // long long用来防止整型溢出（无脑解法）
 		if (n < 2 || !k) return 0;
-        if (k > n / 2){ // simple case
+        if (k > n / 2){ // simple case 此时k大于n/2，相当于没有k的限制
             int ans = 0;
             for (int i=1; i<len; ++i){
                 ans += max(prices[i] - prices[i-1],0);
@@ -18,7 +20,7 @@ public:
             return ans;
         }
 		long long columes = min(n + 1, ((long long)k << 1) + 1); // the number of columns
-		int profit[2][columes], i = 1, j, currentline;
+		int profit[2][columes], i = 1, j, currentline; // 应该可以做到只用一行
 		profit[0][0] = profit[1][0] = 0; // the first column
 		for (; i < columes; ++i) { // the first line
 			profit[0][i] = profit[0][i-1] + (i & 1 ? -prices[i-1] : prices[i-1]);
@@ -76,14 +78,13 @@ int main() {
 }
 
 
-/*
-class Solution {
+class Solutionbad {
 public:
 	int maxProfit(int k, vector<int>& prices) {
 		long long n = prices.size();
 		if (n < 2) return 0;
 		long long columes = min(n + 1, ((long long)k << 1) + 1);
-		int profit[n][columes], i = 1, j;
+		int profit[n][columes], i = 1, j; // 在某个测试用例下profit数组太大，导致错误
 		for (; i < columes; ++i) {
 			prices.push_back(0);
 		}
@@ -115,4 +116,3 @@ public:
 		return maxprofit;
 	}
 };
-*/

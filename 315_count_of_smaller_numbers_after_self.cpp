@@ -1,11 +1,14 @@
-// Count of Smaller Numbers After Self
+// 倒序遍历数组将每个数插入一个二叉搜索树,在每个结点记下其左分支的结点数
+// 若新数大于某个其经过的结点的值，则他右面比他小的数的数量+=此结点左分支结点数
+// 
+
 #include <iostream>
 #include <vector>
 
 using namespace std;
 
-// binary search tree go go go!
-class Solution {
+// binary search tree!
+class Solution { // 83.2%
 public:
 	struct node {
 		node* left = nullptr;

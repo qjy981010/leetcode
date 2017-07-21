@@ -1,7 +1,11 @@
-/*以一个字符为中心或以字符间隙为中心，向两边扩展O(n^2)*/
+// 以一个字符为中心或以字符间隙为中心，向两边扩展O(n^2)
+// 效率超过70%，可以用动态规划做，效率可能并不快，也可以用后缀树，时间复杂度O(n*logn)，最好的办法是用Manacher算法O(n)
+// http://blog.csdn.net/dyx404514/article/details/42061017
 
-#include<iostream>
-#include<string>
+/*note: manacher算法*/
+
+#include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -45,7 +49,3 @@ int main() {
 	string s = "bb";
 	cout << solve.longestPalindrome(s) << endl;
 }
-
-// 效率超过70%，可以用动态规划做，效率可能并不快，也可以用后缀树，时间复杂度O(n*logn)，最好的办法是用Manacher算法O(n)
-// http://blog.csdn.net/dyx404514/article/details/42061017
-

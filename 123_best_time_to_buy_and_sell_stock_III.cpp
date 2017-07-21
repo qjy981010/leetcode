@@ -1,9 +1,13 @@
-#include<iostream>
-#include<vector>
+// 动态规划，从左上角开始向下表示保持状态，向右表示买入或卖出，最多只有5列
+
+/*note: 二维dp，可优化*/
+
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
-class Solution {
+class Solution { // 44.64% ,空间复杂度还可以优化，见188
 public:
     int maxProfit(vector<int>& prices) {
 		int n = prices.size();

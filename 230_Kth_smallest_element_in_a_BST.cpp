@@ -1,5 +1,7 @@
 /* 从小到大，中序遍历，思路比较简单*/
 
+/*note: 中序遍历，从小到大*/
+
 /**
  * Definition for a binary tree node.
  * struct TreeNode {

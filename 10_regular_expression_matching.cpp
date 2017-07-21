@@ -1,4 +1,7 @@
-#include<iostream>
+// 递归，或者动态规划，dp[i][j] 表示 s[0..i] 和 p[0..j] 是否 match
+/*note: 写出程序以后再考虑优化，不要一开始就想优化，可能情况太多比较难办*/
+
+#include <iostream>
 
 using namespace std;
 

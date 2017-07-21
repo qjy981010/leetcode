@@ -1,5 +1,9 @@
-#include<iostream>
-#include<unordered_set>
+// 把每个数存入哈希表，对每个数判断它左右数是否在表内，并循环延伸，每找到通过一个点就将其从表中删除
+
+/*note: 用哈希表优化时间复杂度，经过就删除*/
+
+#include <iostream>
+#include <unordered_set>
 
 using namespace std;
 

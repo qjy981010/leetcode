@@ -1,3 +1,7 @@
+// 尽量把数拆分为3，如过不能完全拆分就剩下2，这样乘积最大
+
+/*note: 纯数学问题*/
+
 #include <iostream>
 
 using namespace std;

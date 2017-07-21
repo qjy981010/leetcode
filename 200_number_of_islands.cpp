@@ -1,5 +1,9 @@
-#include<iostream>
-#include<vector>
+// 遍历，遇到值为‘1’的点则将岛的数量加一，然后递归向四周值为‘1’的方向扩展，并将经过的点设为‘0’
+
+/*note: 递归，经过即删除*/
+
+#include <iostream>
+#include <vector>
 
 using namespace std;
 

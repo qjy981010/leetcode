@@ -2,6 +2,8 @@
 直到遇到以前走过的节点，即在onstack为true的节点则返回false，不可完成，
 《算法》中图的章节提到了这一方法，但是效率和下面的方法差的远*/
 
+/*note: 见下面更巧妙的方法*/
+
 class Solution {
 private:
 	struct node{
@@ -51,9 +53,9 @@ public:
 
 /* https://www.hrwhisper.me/leetcode-graph/
  a more simple one which can beats 95%.
- 循环，每次把图中入度为0的点相邻的边删除，并把此点存入
+ 循环，每次把图中入度为0的点相邻的边删除，并把此点存入*/
 
-class Solution {
+class SolutionPerfect {
 public:
 	bool canFinish(int numCourses, vector<pair<int, int>>& prerequisites) {
 		vector<vector<int> > g(numCourses);
@@ -76,5 +78,3 @@ public:
 		return true;
 	}
 };
-*/
- 

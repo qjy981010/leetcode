@@ -1,5 +1,8 @@
-#include<iostream>
-#include<vector>
+// 二分找出转折点位置，可得到一个完整假递增数组，再在此(假)递增数组中二分查找
+// 或者直接排序以后二分查找
+
+#include <iostream>
+#include <vector>
 
 using namespace std;
 

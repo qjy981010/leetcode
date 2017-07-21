@@ -1,4 +1,9 @@
 // Binary Tree Maximum Path Sum
+// 从每个结点向左右递归，将左右的和与当前最大值比较，需要时更新最大值
+// 然后左右若有和为负则置0，并返回左右最大值与次结点值的和，注意左右有null以及值为负的情况
+
+/*note: 分治递归*/
+
 #include <iostream>
 
 using namespace std;
@@ -11,7 +16,7 @@ struct TreeNode {
     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
-class Solution {
+class Solution { // 51.05%
 public:
 	int maxsum = -2147483648;
 
@@ -59,8 +64,3 @@ public:
 		return max(leftsum, rightsum) + root->val;
 	}
 };
-
-int main() {
-	Solution solve;
-
-}

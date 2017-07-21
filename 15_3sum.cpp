@@ -1,5 +1,8 @@
 /*可以先确定一个值然后用2sum的方法求解，
 循环确定第一个值，向后遍历定位第三个值，然后根据情况将第二个与第三个向中间靠拢*/
+
+/*note: K sum 问题，注意去重处理*/
+
 class Solution {
 public:
     vector< vector<int> > threeSum(vector<int>& nums) {

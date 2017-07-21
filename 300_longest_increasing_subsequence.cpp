@@ -1,10 +1,9 @@
-#include<iostream>
-#include<vector>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
-/*
-class Solution {
+class SolutionPerfect { // 动态规划，维护一个索引为子序列长度，值为此长度最后一个字符的数组，根据此数组递增使用二分法查找
 public:
     int lengthOfLIS(vector<int>& nums) {
 		int n = nums.size();
@@ -27,9 +26,8 @@ public:
 		return max;
     }
 };
-*/
 
-class Solution {
+class Solution { // 普通dp
 public:
 	int lengthOfLIS(vector<int>& nums) {
 		int n = nums.size();

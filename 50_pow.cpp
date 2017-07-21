@@ -1,4 +1,9 @@
-#include<iostream>
+// 直接二分法，递归，每次对指数进行二分，如果指数是负的就先化为正的，然后取倒数,注意边界问题...
+// 不要写成pow(x,n/2) * pow(x,n/2)，这样算了两遍
+
+/*note: 分治*/
+
+#include <iostream>
 
 using namespace std;
 

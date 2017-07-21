@@ -3,7 +3,8 @@
 此window的最大值就是新的值，并重置ttl，否则最大值仍为以前的最大值；若以前的最大值无效，则要重新找出最大值
 最坏情况复杂度为kn*/
 
-// 可以维护优先队列实现，
+/* 可以维护优先队列实现，O(n*logk)
+   deque实现，O(n)*/
 
 #include <iostream>
 #include <vector>
@@ -70,14 +71,14 @@ int main() {
         deque<int> idq;
         vector<int> result;
         int i = 0;
-        
+
         for (i = 0; i < k - 1; i++)
         {
             while (!idq.empty() && (idq.back() < nums[i]))
                 idq.pop_back();
             idq.push_back(nums[i]);
         }
-        
+
         for (i = k - 1; i < nums.size(); i++)
         {
             while (!idq.empty() && (idq.back() < nums[i]))

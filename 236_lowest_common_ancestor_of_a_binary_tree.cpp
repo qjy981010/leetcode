@@ -1,5 +1,7 @@
 /*递归向左右查找，两边都找到则返回此节点，只有一边找到就返回那个找到的那个指针*/
 
+/*note: 分治递归*/
+
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
@@ -9,7 +11,6 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
-
 
 class Solution {
 public:

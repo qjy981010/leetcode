@@ -1,3 +1,6 @@
+// 法1：通过栈存储每一个无法匹配的括号，最后相减取大得结果
+// 法2：设个flag，构造一个存有从每一位开始最短有效长度的vector，遍历字符串，跳过已包含在前面有效范围的字符，最后整合最大有效长度
+
 #include <iostream>
 #include <string>
 #include <stack>
