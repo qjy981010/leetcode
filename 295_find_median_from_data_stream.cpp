@@ -1,5 +1,6 @@
-/*note: 大顶堆与小顶堆*/
 // 对堆还用不熟练，想不到用堆这种数据结构
+
+/*note: 大顶堆与小顶堆*/
 
 #include <iostream>
 #include <vector>
@@ -7,7 +8,6 @@
 
 using namespace std;
 
-//优先队列实现，超过27%
 class MedianFinder { // 维护一个小顶堆一个大顶堆，保持两个堆大小相差不超过1,小顶堆的元素大于等于大顶堆元素
 public:
 	priority_queue<int> maxheap;
@@ -41,7 +41,7 @@ public:
 };
 
 
-/*BST实现，将每个节点左右两边的节点数记下，方便查找，击败16%，最坏情况下复杂度太高
+/*BST实现，将每个节点左右两边的节点数记下，方便查找，击败16%，最坏情况下复杂度太高，改成avl就比较好了
 class MedianFinder {
 public:
 	struct node {

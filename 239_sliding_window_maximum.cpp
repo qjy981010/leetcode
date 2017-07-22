@@ -3,8 +3,8 @@
 此window的最大值就是新的值，并重置ttl，否则最大值仍为以前的最大值；若以前的最大值无效，则要重新找出最大值
 最坏情况复杂度为kn*/
 
-/* 可以维护优先队列实现，O(n*logk)
-   deque实现，O(n)*/
+/* note: 可以维护优先队列实现，O(n*logk)
+   deque实现，存储可能成为最大值的值，并将不可能成为最大值的值弹出,O(n)*/
 
 #include <iostream>
 #include <vector>

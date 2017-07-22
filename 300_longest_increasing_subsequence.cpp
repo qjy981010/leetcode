@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 
+/*note: dp记忆功能的灵活运用，见SolutionPerfect*/
+
 using namespace std;
 
 class SolutionPerfect { // 动态规划，维护一个索引为子序列长度，值为此长度最后一个字符的数组，根据此数组递增使用二分法查找

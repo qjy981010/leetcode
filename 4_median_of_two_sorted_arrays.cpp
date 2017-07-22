@@ -26,7 +26,7 @@ public:
         }
         else
         {
-            return nums1[flag1 + index_1 -1];
+            return nums1[flag1 + index_1 - 1];
         }
     }
 

@@ -1,6 +1,7 @@
 // 通过unordered_map保存以前遇到的是否可达情况，注意结点索引与上一步的跳跃距离两个值才能对应一个bool（能否过河）
 
 /*note: 注意dp的记忆，需要记忆什么，，巧妙地merge两个变量，见Solutionok0的key的生成*/
+// 开始一直以为没必要动态规划，以为递归回溯的时候也有记忆啊，一直忽视了更需要记忆的东西
 
 #include <iostream>
 #include <vector>
@@ -12,7 +13,7 @@ class Solution {
 public:
 	struct hash_fun {
 		size_t operator() (const pair<int, int>& i) const {
-			return i.first ^ i.second;
+			return i.first ^ i.second << 16;
 		}
 	};
 

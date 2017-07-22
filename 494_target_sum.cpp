@@ -1,4 +1,7 @@
 // 递归DFS，每个数分正负两种情况；可以转换为背包问题（一开始还以为要用Ksum才能得到nums中相加得sum的情况数。。）
+
+/*note: 背包问题*/
+
 #include <iostream>
 #include <vector>
 

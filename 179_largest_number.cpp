@@ -13,7 +13,7 @@ using namespace std;
 
 class Solution {
 public:
-	static bool mycomp(const string& a, const string& b) {//开始写了半天比较函数，特别复杂有bug，后来想出来这种操作。。。
+	static bool mycomp(const string& a, const string& b) {//开始写了半天比较函数，特别复杂，后来想出来这种操作。。。
 		return a+b > b+a;
 	}
 
