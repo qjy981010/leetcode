@@ -11,7 +11,7 @@
 
 using namespace std;
 
-class Solution {
+class Solution { // 94.98%
 public:
 	static bool mycomp(const vector<int>& a, const vector<int>& b) {
 		return a[1] < b[1];
@@ -19,7 +19,6 @@ public:
 
 	int scheduleCourse(vector<vector<int>>& courses) {
 		int size = courses.size();
-		if (size < 2) return size;
 
 		sort(courses.begin(), courses.end(), mycomp);
 
